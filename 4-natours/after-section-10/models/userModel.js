@@ -48,6 +48,8 @@ const userSchema = new mongoose.Schema({
   }
 });
 
+// run this midleware only when creating a new user or if the password has been modified, changed or updated
+// this is because a user may just be changing only the email address
 userSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();
